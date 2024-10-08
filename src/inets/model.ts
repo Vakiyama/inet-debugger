@@ -3,25 +3,30 @@ export type Root = { type: 'root' };
 const root: Root = { type: 'root' };
 
 export type Eraser = { type: 'eraser' };
-export type Num = { type: 'number'; value: number };
-export type Ref = { type: 'reference'; id: string };
+export type Number = { type: 'number'; value: number };
+export type Reference = { type: 'reference'; id: string };
 
-export type UnaryNode = (Eraser | Num | Ref) & { primary: Node };
+export type UnaryNode = (Eraser | Number | Reference) & { primary: Node };
 
-export type BinaryNode = { lhs: Node; rhs: Node; primary: Node };
+type BaseBinary<T extends string> = {
+  lhs: Node;
+  rhs: Node;
+  primary: Node;
+  type: T;
+};
 
-export type Constructor = { type: 'constructor' } & BinaryNode;
-export type Duplicator = { type: 'duplicator' } & BinaryNode;
-export type Operator = { type: 'operate' } & BinaryNode;
-export type Switch = { type: 'switch' } & BinaryNode;
+export type Constructor = BaseBinary<'constructor'>;
+export type Duplicator = BaseBinary<'duplicator'>;
+export type Operator = BaseBinary<'operator'>;
+export type Switch = BaseBinary<'switch'>;
 
-export type Node =
-  | Constructor
-  | Duplicator
-  | UnaryNode
-  | Switch
-  | Operator
-  | Root;
+export type BinaryNode = (Constructor | Duplicator | Operator | Switch) & {
+  lhs: Node;
+  rhs: Node;
+  primary: Node;
+};
+
+export type Node = BinaryNode | UnaryNode | Root;
 
 // cases:
 // Con ~ Con [x]
@@ -46,10 +51,9 @@ function assert(truthy: any, msg: string) {
 function replaceReference() { }
 
 function interact(a: Node, b: Node) {
+  // check replace references
   if (a.type === 'root' || b.type === 'root')
     throw new Error('Cannot interact root nodes');
-
-  // check replace references
 
   assert(
     a.primary === b && b.primary === a,
@@ -160,6 +164,7 @@ function interact(a: Node, b: Node) {
 
   // Num ~ Swi
   if (a.type === 'number' && b.type === 'duplicator') {
+
   }
 }
 
