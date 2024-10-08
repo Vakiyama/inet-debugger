@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+
+## To run in dev
+
+bun i
+bun run dev
+
+
+## Template stuff
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
