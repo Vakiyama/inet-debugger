@@ -164,9 +164,9 @@ function interact(a: Node, b: Node) {
 
   // Num ~ Swi
   if (a.type === 'number' && b.type === 'duplicator') {
-
   }
 }
+
 
 function isBinary(node: Node) {
   return Object.keys(node).includes('lhs');
