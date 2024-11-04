@@ -1,5 +1,38 @@
+*
 
-node_modules/
-node_modules
+!.gitignore
+!README.md
 
-.direnv
+!flake.lock
+!flake.nix
+!nix/
+!nix/*
+
+!index.html
+!src/
+!src/*
+!src/**/*
+!public/
+!public/*
+
+# bun
+!bun.lockb
+!package-lock.json
+!package.json
+
+# eslint
+!eslint.config.js
+
+# postcss
+!postcss.config.js
+
+# tailwind
+!tailwind.config.js
+
+# typescipt
+!tsconfig.json
+!tsconfig.app.json
+!tsconfig.node.json
+
+# vite
+!vite.config.ts

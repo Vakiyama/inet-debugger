@@ -15,9 +15,13 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
+
+        nodeModules = pkgs.callPackage ./nix/node_modules.nix { };
+
+        staticServe = pkgs.callPackage ./nix/default.nix { inherit nodeModules; };
       in
       {
-        packages.default = pkgs.callPackage ./nix { inherit (pkgs) bun vite; };
+        packages.default = staticServe;
 
         devShells.default = pkgs.mkShell { buildInputs = [ pkgs.bun ]; };
       }
